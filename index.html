@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI Toolbox is a premium static web app with AI utilities for writing, coding, study, resumes, and prompt engineering.">
+  <meta name="keywords" content="AI toolbox, Gemini API, OpenRouter, prompt improver, story generator, summarizer, vanilla JavaScript">
+  <meta name="author" content="AI Toolbox">
+  <meta property="og:title" content="AI Toolbox">
+  <meta property="og:description" content="A responsive AI utility workspace built with HTML, CSS, and vanilla JavaScript.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/og-preview.svg">
+  <meta name="theme-color" content="#0B0F19">
+  <title>AI Toolbox | Premium AI Utilities</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to workspace</a>
+
+  <header class="site-header" aria-label="Primary navigation">
+    <nav class="nav shell">
+      <a class="brand" href="#top" aria-label="AI Toolbox home">
+        <img src="assets/icons/logo.svg" alt="" width="36" height="36">
+        <span>AI Toolbox</span>
+      </a>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+          <span class="icon moon" aria-hidden="true"></span>
+        </button>
+        <button class="icon-btn" id="keyButton" type="button" aria-label="API settings" title="API settings">
+          <span class="icon key" aria-hidden="true"></span>
+        </button>
+        <a class="icon-btn" href="https://github.com/" target="_blank" rel="noreferrer" aria-label="Open GitHub" title="GitHub">
+          <span class="icon github" aria-hidden="true"></span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <p class="eyebrow">Vanilla JavaScript AI workspace</p>
+        <h1 id="heroTitle">AI Toolbox</h1>
+        <p class="hero-subtitle">Generate, refine, summarize, explain, and study from one fast static interface.</p>
+        <p class="hero-description">A polished AI command center for writers, students, engineers, and job seekers. Bring a Gemini or OpenRouter key, choose a tool, and ship better text in seconds.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#toolGrid">
+            <span class="icon spark" aria-hidden="true"></span>
+            Launch tools
+          </a>
+          <button class="ghost-btn" id="heroKeyButton" type="button">
+            <span class="icon key" aria-hidden="true"></span>
+            Set API key
+          </button>
+        </div>
+      </div>
+      <div class="hero-panel" aria-label="AI Toolbox preview">
+        <div class="preview-topbar">
+          <span></span><span></span><span></span>
+          <strong>Live Output</strong>
+        </div>
+        <div class="preview-terminal">
+          <p class="preview-tag">prompt-improver.run()</p>
+          <p class="preview-line"><span class="typing-demo">Transform a rough idea into a model-ready prompt...</span></p>
+          <div class="preview-meter"><span></span></div>
+          <div class="preview-chips" aria-hidden="true">
+            <span>Story</span>
+            <span>Code</span>
+            <span>Quiz</span>
+            <span>Email</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-section shell" id="toolGrid" aria-labelledby="toolsTitle">
+      <div class="section-heading">
+        <p class="eyebrow">Nine focused utilities</p>
+        <h2 id="toolsTitle">Choose a tool</h2>
+      </div>
+      <div class="tool-grid" id="toolsContainer" aria-live="polite"></div>
+    </section>
+
+    <section class="workspace-section shell" id="workspace" aria-labelledby="workspaceTitle">
+      <div class="workspace-shell">
+        <aside class="tool-sidebar" aria-label="Tool switcher">
+          <div class="sidebar-header">
+            <p class="eyebrow">Workspace</p>
+            <h2 id="workspaceTitle">AI Story Generator</h2>
+          </div>
+          <div class="tool-tabs" id="toolTabs"></div>
+        </aside>
+
+        <div class="workspace-panel">
+          <div class="workspace-header">
+            <div>
+              <p class="eyebrow" id="activeCategory">Creative writing</p>
+              <h3 id="activeToolName">AI Story Generator</h3>
+              <p id="activeToolDescription">Turn an idea into a structured original story.</p>
+            </div>
+            <div class="provider-pill" id="providerPill" aria-live="polite">Gemini ready</div>
+          </div>
+
+          <form class="generator-form" id="generatorForm">
+            <label class="field-label" for="mainInput" id="mainInputLabel">Idea or prompt</label>
+            <div class="textarea-wrap">
+              <textarea id="mainInput" rows="8" placeholder="Describe what you want to create..." maxlength="16000" required></textarea>
+              <div class="counter"><span id="charCount">0</span>/16000</div>
+            </div>
+
+            <div class="options-grid" id="optionsContainer"></div>
+
+            <div class="form-actions">
+              <button class="generate-btn" id="generateButton" type="submit">
+                <span class="btn-loader" aria-hidden="true"></span>
+                <span class="icon spark" aria-hidden="true"></span>
+                <span class="generate-text">Generate</span>
+              </button>
+              <button class="secondary-btn" id="copyButton" type="button">
+                <span class="icon copy" aria-hidden="true"></span>
+                Copy
+              </button>
+              <button class="secondary-btn" id="clearButton" type="button">
+                <span class="icon clear" aria-hidden="true"></span>
+                Clear
+              </button>
+              <button class="secondary-btn" id="regenerateButton" type="button">
+                <span class="icon refresh" aria-hidden="true"></span>
+                Regenerate
+              </button>
+            </div>
+          </form>
+
+          <article class="output-card" aria-labelledby="outputTitle">
+            <div class="output-header">
+              <h3 id="outputTitle">Output</h3>
+              <span id="statusText">Ready</span>
+            </div>
+            <div class="empty-state" id="emptyState">
+              <span class="icon sparkle-large" aria-hidden="true"></span>
+              <p>Your generated result will appear here.</p>
+            </div>
+            <div class="output-content markdown-body" id="outputContent" aria-live="polite"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="settings-modal" id="settingsModal" aria-labelledby="settingsTitle">
+    <form method="dialog" class="modal-card">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Secure local setup</p>
+          <h2 id="settingsTitle">API Settings</h2>
+        </div>
+        <button class="icon-btn" value="cancel" aria-label="Close settings" title="Close">
+          <span class="icon close" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <label class="field-label" for="providerSelect">Provider</label>
+      <select id="providerSelect">
+        <option value="gemini">Gemini</option>
+        <option value="openrouter">OpenRouter</option>
+      </select>
+
+      <label class="field-label" for="apiKeyInput">API key</label>
+      <input id="apiKeyInput" type="password" autocomplete="off" placeholder="Paste your key">
+
+      <label class="field-label" for="modelInput">Model</label>
+      <input id="modelInput" type="text" autocomplete="off">
+
+      <div class="modal-actions">
+        <button class="primary-btn" id="saveSettingsButton" type="button">
+          <span class="icon save" aria-hidden="true"></span>
+          Save
+        </button>
+        <button class="secondary-btn" id="clearKeyButton" type="button">
+          <span class="icon clear" aria-hidden="true"></span>
+          Remove key
+        </button>
+      </div>
+      <p class="settings-note">Keys are stored only in this browser through localStorage. You can also set defaults in config.js before deploying.</p>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="site-footer shell">
+    <p>Developed by <strong>AI Toolbox</strong></p>
+    <div class="footer-links">
+      <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <span>v1.0.0</span>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="prompts.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
