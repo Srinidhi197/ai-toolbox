@@ -9,7 +9,7 @@ window.AI_TOOLBOX_CONFIG = {
     },
     openrouter: {
       name: "OpenRouter",
-      apiKey: "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",
+      apiKey: "",
       model: "google/gemini-2.5-flash",
       legacyModels: ["google/gemini-flash-1.5", "google/gemini-1.5-flash"],
       endpoint: "https://openrouter.ai/api/v1/chat/completions",
